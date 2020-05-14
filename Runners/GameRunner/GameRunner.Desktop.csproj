@@ -99,12 +99,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MonoVision\MonoVision.OpenGL.csproj">
-      <Project>{6d75e618-19ca-4c51-9546-f10965fbc0b8}</Project>
-      <Name>MonoVision.OpenGL</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\SDK\PixelVision8.SDK.projitems" Label="Shared" />
   <Import Project="..\..\SDK\PixelVision8.Lua.projitems" Label="Shared" />

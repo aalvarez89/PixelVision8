@@ -22,6 +22,8 @@ using System;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PixelVision8.Runner.Importers;
+using PixelVision8.Runner.Parsers;
 
 namespace PixelVision8.Runner.Data
 {
@@ -104,17 +106,19 @@ namespace PixelVision8.Runner.Data
                         reader.ReadBytes((int) reader.BaseStream.Length));
                 }
 
+
+
                 // Sharpness
-                crtShader.Parameters["hardPix"]?.SetValue(-10.0f); // -3.0f (4 - 6)
-
-                // Brightness
-                crtShader.Parameters["brightboost"]?.SetValue(1f); // 1.0f (.5 - 1.5)
-
-
-                crtShader.Parameters["hardScan"]?.SetValue(-6.0f); // -8.0f
-                crtShader.Parameters["warpX"]?.SetValue(0.008f); // 0.031f
-                crtShader.Parameters["warpY"]?.SetValue(0.01f); // 0.041f
-                crtShader.Parameters["shape"]?.SetValue(2f); // 2.0f
+                // crtShader.Parameters["hardPix"]?.SetValue(-10.0f); // -3.0f (4 - 6)
+                //
+                // // Brightness
+                // crtShader.Parameters["brightboost"]?.SetValue(1f); // 1.0f (.5 - 1.5)
+                //
+                //
+                // crtShader.Parameters["hardScan"]?.SetValue(-6.0f); // -8.0f
+                // crtShader.Parameters["warpX"]?.SetValue(0.008f); // 0.031f
+                // crtShader.Parameters["warpY"]?.SetValue(0.01f); // 0.041f
+                // crtShader.Parameters["shape"]?.SetValue(2f); // 2.0f
 
 
 
@@ -170,10 +174,10 @@ namespace PixelVision8.Runner.Data
             {
                 renderTexture = new Texture2D(graphicManager.GraphicsDevice, gameWidth, gameHeight);
 
-                shaderEffect?.Parameters["textureSize"].SetValue(new Vector2(gameWidth, gameHeight));
-                shaderEffect?.Parameters["videoSize"].SetValue(new Vector2(gameWidth, gameHeight));
-                shaderEffect?.Parameters["outputSize"].SetValue(new Vector2(graphicManager.PreferredBackBufferWidth,
-                    graphicManager.PreferredBackBufferHeight));
+                // shaderEffect?.Parameters["textureSize"].SetValue(new Vector2(gameWidth, gameHeight));
+                // // shaderEffect?.Parameters["videoSize"].SetValue(new Vector2(gameWidth, gameHeight));
+                // shaderEffect?.Parameters["outputSize"].SetValue(new Vector2(graphicManager.PreferredBackBufferWidth,
+                //     graphicManager.PreferredBackBufferHeight));
 
                 // Set the new number of pixels
                 totalPixels = renderTexture.Width * renderTexture.Height;
@@ -218,9 +222,6 @@ namespace PixelVision8.Runner.Data
                 offset.Y = 0;
             }
 
-            //            Console.WriteLine("Reset Res Fullscreen " + fullscreen + " "+displayWidth+"x"+displayHeight);
-
-
             // Apply changes
             graphicManager.IsFullScreen = fullscreen;
 
@@ -233,19 +234,41 @@ namespace PixelVision8.Runner.Data
             }
         }
 
-        public void Render(Color[] pixels)
+        // private GraphicsDeviceManager _graphics;
+        // private SpriteBatch _spriteBatch;
+        // private Effect _quickDraw;
+        private Texture2D _colorPallete;
+        private SpriteBatch _spriteBatch;
+        
+        public void RebuildColorPalette(Color[] colors)
         {
-            // TODO didn't have to check length before service refactoring
-            if (totalPixels != pixels.Length) return;
+            
+            // Create color palette texture
+            var cachedColors = colors;//pngReader.colorPalette.ToArray();
+
+            _spriteBatch = new SpriteBatch(graphicManager.GraphicsDevice);
+
+            _colorPallete = new Texture2D(graphicManager.GraphicsDevice, colors.Length, 1);
+
+            var fullPalette = new Color[_colorPallete.Width];
+            for (int i = 0; i < fullPalette.Length; i++) { fullPalette[i] = i < cachedColors.Length ? cachedColors[i] : cachedColors[0]; }
+
+            _colorPallete.SetData(colors);
+
+        }
+
+        public void Render(int[] pixels)
+        {
 
             renderTexture.SetData(pixels);
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: useCRT ? shaderEffect : null);
+            _spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointClamp);
+            crtShader.CurrentTechnique.Passes[0].Apply();
+            graphicManager.GraphicsDevice.Textures[1] = _colorPallete;
+            graphicManager.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
+            _spriteBatch.Draw(renderTexture, offset, visibleRect, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            _spriteBatch.End();
 
-            spriteBatch.Draw(renderTexture, offset, visibleRect, Color.White, 0f, Vector2.Zero, scale,
-                SpriteEffects.None, 1f);
-
-            spriteBatch.End();
         }
 
         //        public void CaptureScreenshot()

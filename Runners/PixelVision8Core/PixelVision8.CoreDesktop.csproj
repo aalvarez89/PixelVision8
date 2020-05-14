@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Content\bios.json" />
+    <None Remove="Content\colors.png" />
+    <None Remove="Content\screenshot.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="C:\Users\Jesse Freeman\Documents\Projects\PixelVision8\PixelVision8RunnerCore\Effects\palette-colorizer.fx" />
+    <Content Include="Content\bios.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\colors.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Effects\*.*">
+      <Link>Content\Effects\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\SDK\**\*.cs">
+      <Link>SDK\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Compile>
+    <Content Include="..\..\Disks\RunnerTools\**\*.*">
+      <Link>Content\PixelVisionOS\Tools\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="C:\Users\Jesse Freeman\Documents\Projects\PixelVision8\PixelVision8RunnerCore\Effects\palette-colorizer.fx" Link="palette-colorizer.fx" />
+  </ItemGroup>
+
+</Project>

@@ -3,10 +3,10 @@
     "GameChip":
     {
         "savedData":{
-            "targetFile": "/Workspace/SpaceRanger/info.json",
-            "sessionID": "202005060916591670",
+            "targetFile": "/Workspace/Terminal/code-inventory.lua",
+            "sessionID": "202005141503558089",
             "rootDirectory": "/Workspace/HelloWorld/",
-            "cursor": "25,7",
+            "cursor": "1,1",
             "selectedSprite": "0",
             "scroll": "1,1"
         }

@@ -26,12 +26,12 @@ namespace PixelVision8.Engine.Chips
 {
     public class DisplayChip : AbstractChip, IDraw
     {
-        private Color[] cachedColors;
+        // private Color[] cachedColors;
 
         private DrawRequest draw;
         protected List<DrawRequest>[] DrawRequestLayers = new List<DrawRequest>[0];
         protected Stack<int[]> DrawRequestPixelDataPool = new Stack<int[]>();
-        public Color[] Pixels = new Color[0];
+        public int[] Pixels = new int[0];
         public int TotalPixels;
         public int OverscanX { get; set; }
         public int OverscanY { get; set; }
@@ -87,7 +87,7 @@ namespace PixelVision8.Engine.Chips
         /// </summary>
         public void Draw()
         {
-            cachedColors = engine.ColorChip.colors;
+            // cachedColors = engine.ColorChip.colors;
 
             // Loop through all draw requests
             for (_layer = 0; _layer < DrawRequestLayers.Length; _layer++)
@@ -273,7 +273,7 @@ namespace PixelVision8.Engine.Chips
                     _index = _srcX + size * _srcY;
 
                     // Set the pixel
-                    Pixels[_index] = cachedColors[_colorID];
+                    Pixels[_index] = _colorID;//cachedColors[_colorID];
                 }
             }
         }
@@ -301,7 +301,7 @@ namespace PixelVision8.Engine.Chips
                 var col = i % width;
                 if (col < visibleWidth && index < newTotalPixels)
                 {
-                    newPixels[index] = pixels[i];
+                    // newPixels[index] = pixels[i];
                     index++;
                 }
             }

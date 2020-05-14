@@ -532,8 +532,8 @@ namespace PixelVision8.Runner
             if(displayTarget.HasShader() == false)
             {
                 // Configure CRT shader
-                var shaderPath = WorkspacePath.Parse(bios.ReadBiosData(CRTBiosSettings.CRTEffectPath.ToString(),
-                    "/App/Effects/crt-lottes-mg.ogl.mgfxo"));
+                var shaderPath = WorkspacePath.Parse("/App/Effects/quick-draw.ogl.mgfxc");//bios.ReadBiosData(CRTBiosSettings.CRTEffectPath.ToString(),
+                    //"/App/Effects/quick-draw.ogl.mgfxc"));
 
                 if (workspaceService.Exists(shaderPath))
                 {

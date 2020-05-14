@@ -56,6 +56,19 @@ namespace PixelVision8.Engine.Utils
             b = byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber); // / (float) byte.MaxValue;
         }
 
+        public static Color HexToRgb(string hex)
+        {
+            hex ??= "FF00FF";
+
+            if (hex[0] == '#') hex = hex.Substring(1);
+
+            return new Color(
+                byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber), // / (float) byte.MaxValue;
+                byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber), // / (float) byte.MaxValue;
+                byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber) // / (float) byte.MaxValue;
+            );
+        }
+
         /// <summary>
         ///     Static method to valide that a HEX color can be parsed. HEX colors need
         ///     to be in the correct format #FFFFFF or #FFF

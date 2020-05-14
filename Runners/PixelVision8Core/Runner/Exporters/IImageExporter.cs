@@ -1,4 +1,4 @@
-﻿//   
+//   
 // Copyright (c) Jesse Freeman, Pixel Vision 8. All rights reserved.  
 //  
 // Licensed under the Microsoft Public License (MS-PL) except for a few
@@ -18,18 +18,13 @@
 // Shawn Rakowski - @shwany
 //
 
+using System.IO;
 using Microsoft.Xna.Framework;
 
-namespace PixelVision8.Runner
+namespace PixelVision8.Runner.Exporters
 {
-    public interface IDisplayTarget
+    public interface IImageExporter
     {
-        void ResetResolution(int gameWidth, int gameHeight, int overScanX = 0, int overScanY = 0);
-
-        void RebuildColorPalette(Color[] colors);
-        
-        void Render(int[] colors);
-        //        void CacheColors(IEngine engine);
-        //        void ConvertMousePosition(Vector pos);
+        void Write(int width, int height, Stream outputStream, Color[] colors);
     }
 }

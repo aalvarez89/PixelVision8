@@ -423,6 +423,11 @@ namespace PixelVision8.Runner
             // Only call draw if the window has focus
             if (RunnerActive) ActiveEngine.Draw();
 
+            if (ActiveEngine.ColorChip.invalid)
+            {
+                displayTarget.RebuildColorPalette(ActiveEngine.ColorChip.colors);
+            }
+
             displayTarget.Render(ActiveEngine.DisplayChip.Pixels);
 
             if (resolutionInvalid)
