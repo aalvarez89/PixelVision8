@@ -10,16 +10,16 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 namespace PixelVision8.CoreDesktop
 {
-    class ShaderTest : Game
+    class ShaderByteTest : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Effect _quickDraw;
-        private Texture2D _screen, _colorPallete;
-        private int[] _data;
+        private Texture2D _pixel, _screen, _colorPallete;
+        private byte[] _data;
         int scale = 2;
 
-        public ShaderTest()
+        public ShaderByteTest()
         {
             _graphics = new GraphicsDeviceManager(this);
             // Content.RootDirectory = "Content";
@@ -56,7 +56,7 @@ namespace PixelVision8.CoreDesktop
             var cachedColors = pngReader.colorPalette.ToArray();
 
             // Convert all of the pixels into color ids
-            _data = pngReader.pixels;
+            _data = pngReader.pixels.Select(Convert.ToByte).ToArray();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -67,11 +67,14 @@ namespace PixelVision8.CoreDesktop
 
             _colorPallete.SetData(fullPalette);
 
+            _pixel = new Texture2D(GraphicsDevice, 1, 1);
+            _pixel.SetData(new Color[] { Color.White });
+
             // Create screen texture
-            _screen = new Texture2D(GraphicsDevice, pngReader.width, pngReader.height);
+            _screen = new Texture2D(GraphicsDevice, pngReader.width/4, pngReader.height);
 
             // Load shader
-            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "Effects", "quick-draw.ogl.mgfxc");
+            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "Effects", "quick-draw-bytes.ogl.mgfxc");
             fileData = File.OpenRead(path);
             using (reader = new BinaryReader(fileData))
             {
@@ -79,7 +82,7 @@ namespace PixelVision8.CoreDesktop
             }
 
             // Set palette total
-            // _quickDraw.Parameters["paletteTotal"].SetValue((float)_colorPallete.Width);
+            _quickDraw.Parameters["imageWidth"].SetValue((float)pngReader.width);
 
         }
 
@@ -103,7 +106,9 @@ namespace PixelVision8.CoreDesktop
             _quickDraw.CurrentTechnique.Passes[0].Apply();
             GraphicsDevice.Textures[1] = _colorPallete;
             GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
-            _spriteBatch.Draw(_screen, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            GraphicsDevice.Textures[2] = _screen;
+            GraphicsDevice.SamplerStates[2] = SamplerState.PointClamp;
+            _spriteBatch.Draw(_pixel, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

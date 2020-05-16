@@ -118,16 +118,7 @@ namespace PixelVision8.Runner
             server = new MoonSharpVsCodeDebugServer(1985);
             server.Start();
         }
-
-        public PixelVision8Runner()
-        {
-            //            throw new NotImplementedException();
-        }
-
-
-
-        //        public List<string> loadHistory = new List<string>();
-        //        protected List<Dictionary<string, string>> metaDataHistory = new List<Dictionary<string, string>>();
+        
         protected string Documents => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         public GameDataExportService ExportService { get; protected set; }

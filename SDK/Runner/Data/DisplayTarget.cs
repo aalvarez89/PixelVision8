@@ -19,7 +19,9 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PixelVision8.Runner.Importers;
@@ -168,11 +170,16 @@ namespace PixelVision8.Runner.Data
             }
         }
 
+        Rectangle displayRect = Rectangle.Empty;
+
         public void ResetResolution(int gameWidth, int gameHeight, int overScanX = 0, int overScanY = 0)
         {
             if (renderTexture == null || renderTexture.Width != gameWidth || renderTexture.Height != gameHeight)
             {
-                renderTexture = new Texture2D(graphicManager.GraphicsDevice, gameWidth, gameHeight);
+                renderTexture = new Texture2D(graphicManager.GraphicsDevice, gameWidth/4, gameHeight);
+
+                // Set palette total
+                crtShader.Parameters["imageWidth"].SetValue((float)gameWidth);
 
                 // shaderEffect?.Parameters["textureSize"].SetValue(new Vector2(gameWidth, gameHeight));
                 // // shaderEffect?.Parameters["videoSize"].SetValue(new Vector2(gameWidth, gameHeight));
@@ -180,11 +187,11 @@ namespace PixelVision8.Runner.Data
                 //     graphicManager.PreferredBackBufferHeight));
 
                 // Set the new number of pixels
-                totalPixels = renderTexture.Width * renderTexture.Height;
+                // totalPixels = gameWidth * renderTexture.Height;
             }
 
             // Calculate the game's resolution
-            visibleRect.Width = renderTexture.Width - overScanX;
+            visibleRect.Width = gameWidth - overScanX;
             visibleRect.Height = renderTexture.Height - overScanY;
 
             var tmpMonitorScale = fullscreen ? 1 : monitorScale;
@@ -222,6 +229,13 @@ namespace PixelVision8.Runner.Data
                 offset.Y = 0;
             }
 
+            displayRect.X = (int)offset.X;
+            displayRect.Y = (int)offset.Y;
+            displayRect.Width =(int)(visibleRect.Width * scale.X);
+            displayRect.Height = (int) (visibleRect.Height * scale.Y);
+
+            visibleRect.Width /= 4;
+
             // Apply changes
             graphicManager.IsFullScreen = fullscreen;
 
@@ -232,14 +246,13 @@ namespace PixelVision8.Runner.Data
                 graphicManager.PreferredBackBufferHeight = displayHeight;
                 graphicManager.ApplyChanges();
             }
+
         }
 
-        // private GraphicsDeviceManager _graphics;
-        // private SpriteBatch _spriteBatch;
-        // private Effect _quickDraw;
         private Texture2D _colorPallete;
         private SpriteBatch _spriteBatch;
-        
+        private Texture2D _pixel;
+
         public void RebuildColorPalette(Color[] colors)
         {
             
@@ -255,18 +268,23 @@ namespace PixelVision8.Runner.Data
 
             _colorPallete.SetData(colors);
 
+            _pixel = new Texture2D(graphicManager.GraphicsDevice, 1, 1);
+            _pixel.SetData(new Color[] { Color.White });
+
         }
 
         public void Render(int[] pixels)
         {
 
-            renderTexture.SetData(pixels);
+            renderTexture.SetData(pixels.Select(Convert.ToByte).ToArray());
 
             _spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointClamp);
             crtShader.CurrentTechnique.Passes[0].Apply();
             graphicManager.GraphicsDevice.Textures[1] = _colorPallete;
             graphicManager.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
-            _spriteBatch.Draw(renderTexture, offset, visibleRect, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            graphicManager.GraphicsDevice.Textures[2] = renderTexture;
+            graphicManager.GraphicsDevice.SamplerStates[2] = SamplerState.PointClamp;
+            _spriteBatch.Draw(renderTexture,  displayRect, visibleRect, Color.White, 0f, Vector2.Zero, SpriteEffects.None,  1f);
             _spriteBatch.End();
 
         }

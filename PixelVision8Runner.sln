@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PixelVision8.CoreDesktop", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Framework.DesktopGL", "MonoGame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj", "{1BE09A08-A830-46E0-903A-89BD1FA0327C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{46EE7682-DABC-4D0F-9FE2-277A30132566}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameRunner.CoreDesktop", "Runners\GameRunnerCore\GameRunner.CoreDesktop.csproj", "{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,30 @@ Global
 		{1BE09A08-A830-46E0-903A-89BD1FA0327C}.Release|x64.Build.0 = Release|Any CPU
 		{1BE09A08-A830-46E0-903A-89BD1FA0327C}.Release|x86.ActiveCfg = Release|Any CPU
 		{1BE09A08-A830-46E0-903A-89BD1FA0327C}.Release|x86.Build.0 = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|x64.Build.0 = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Debug|x86.Build.0 = Debug|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|x64.ActiveCfg = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|x64.Build.0 = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|x86.ActiveCfg = Release|Any CPU
+		{46EE7682-DABC-4D0F-9FE2-277A30132566}.Release|x86.Build.0 = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|x64.Build.0 = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Debug|x86.Build.0 = Debug|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|x64.ActiveCfg = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|x64.Build.0 = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|x86.ActiveCfg = Release|Any CPU
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +80,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F7CBA941-4352-41E5-997E-27326156313F} = {8759BE68-DE03-4611-A6C1-D6E5C51E6708}
 		{1BE09A08-A830-46E0-903A-89BD1FA0327C} = {B0E8551B-B9FD-4020-BD22-36DC2224F79F}
+		{F69FA917-E2CE-4BA1-930B-C2E7D33F22EE} = {8759BE68-DE03-4611-A6C1-D6E5C51E6708}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F34BD1FF-9FB3-4809-B45D-C0B2DAB96D51}

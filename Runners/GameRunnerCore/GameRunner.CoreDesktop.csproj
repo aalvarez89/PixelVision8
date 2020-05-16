@@ -4,27 +4,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyName>PixelVision8</AssemblyName>
-    <RootNamespace>PixelVision8</RootNamespace>
+    <AssemblyName>GameRunner</AssemblyName>
+    <RootNamespace>GameRunner</RootNamespace>
     <Version>1.9.8</Version>
-    <PackageId>PixelVision8</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Content\bios.json" />
-    <None Remove="Content\colors.png" />
-    <None Remove="Content\screenshot.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="C:\Users\Jesse Freeman\Documents\Projects\PixelVision8\PixelVision8RunnerCore\Effects\palette-colorizer.fx" />
     <Content Include="Content\bios.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\colors.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\screenshot.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\Effects\*.*">
@@ -34,9 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\SDK\Editor\**\*.cs">
-      <Link>SDK\%(RecursiveDir)%(Filename)%(Extension)</Link>
-    </Compile>
     <Compile Include="..\..\SDK\Engine\**\*.cs">
       <Link>SDK\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
@@ -53,6 +40,10 @@
       <Link>Content\PixelVisionOS\Tools\%(RecursiveDir)%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\Disks\PixelVisionOS\System\Tools\WorkspaceTool\ProjectTemplate\*.*">
+      <Link>Content\DefaultGame\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -60,15 +51,27 @@
     <Content Remove="..\..\Effects\crt-lottes-mg.ogl.mgfxc" />
     <Content Remove="..\..\Effects\mgfxc.exe" />
     <Content Remove="..\..\Effects\mgfxc.pdb" />
+    <Content Remove="..\..\Effects\palette-colorizer.fx" />
     <Content Remove="..\..\Effects\palette-colorizer.ogl.mgfxc" />
+    <Content Remove="..\..\Effects\QuickDraw.fx" />
+    <Content Remove="..\..\Effects\QuickDrawBytes.fx" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\Effects\crt-lottes-mg.fx" />
-    <None Include="..\..\Effects\crt-lottes-mg.ogl.mgfxc" />
-    <None Include="..\..\Effects\mgfxc.exe" />
+    <None Include="..\..\Effects\crt-lottes-mg.ogl.mgfxc">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Effects\mgfxc.exe">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\Effects\mgfxc.pdb" />
-    <None Include="..\..\Effects\palette-colorizer.ogl.mgfxc" />
+    <None Include="..\..\Effects\palette-colorizer.fx" />
+    <None Include="..\..\Effects\palette-colorizer.ogl.mgfxc">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Effects\QuickDraw.fx" />
+    <None Include="..\..\Effects\QuickDrawBytes.fx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,16 +81,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="..\..\Effects\QuickDraw.fx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="..\..\Effects\QuickDrawBytes.fx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-    <Content Update="C:\Users\Jesse Freeman\Documents\Projects\PixelVision8\PixelVision8RunnerCore\Effects\palette-colorizer.fx" Link="palette-colorizer.fx" />
   </ItemGroup>
 
 </Project>
