@@ -425,7 +425,7 @@ namespace PixelVision8.Runner
 
             if (ActiveEngine.ColorChip.invalid)
             {
-                displayTarget.RebuildColorPalette(ActiveEngine.ColorChip.colors);
+                displayTarget.RebuildColorPalette(ActiveEngine.ColorChip);
             }
 
             displayTarget.Render(ActiveEngine.DisplayChip.Pixels);

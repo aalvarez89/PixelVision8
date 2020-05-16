@@ -92,7 +92,9 @@ namespace PixelVision8.Runner.Parsers
                 ? colorMapChip
                 : chips.ColorChip;
 
-            colorData = colorChip.colors;
+            colorData = ColorUtils.ConvertColors(colorChip.hexColors, colorChip.maskColor, colorChip.debugMode,
+                colorChip.backgroundColor);
+
 
             var colorRefs = colorData.Select(c => ColorUtils.RgbToHex(c.R, c.G, c.B)).ToArray();
 

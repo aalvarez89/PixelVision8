@@ -136,16 +136,16 @@ namespace PixelVision8.Runner.Services
             AddExporter(new SpriteBuilderExporter(path, engine, files));
         }
 
-        public void ExportImage(string path, int[] pixelData, IEngine engine, int width, int height)
-        {
-            Restart();
-
-
-            var imageExporter = new PNGWriter();
-
-            AddExporter(new PixelDataExporter(path, pixelData, width, height, engine.ColorChip.colors, imageExporter,
-                engine.ColorChip.maskColor));
-        }
+        // public void ExportImage(string path, int[] pixelData, IEngine engine, int width, int height)
+        // {
+        //     Restart();
+        //
+        //
+        //     var imageExporter = new PNGWriter();
+        //
+        //     AddExporter(new PixelDataExporter(path, pixelData, width, height, engine.ColorChip.colors, imageExporter,
+        //         engine.ColorChip.maskColor));
+        // }
 
     }
 }

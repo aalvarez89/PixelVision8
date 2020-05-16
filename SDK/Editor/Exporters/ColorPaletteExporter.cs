@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using PixelVision8.Engine.Chips;
+using PixelVision8.Engine.Utils;
 
 namespace PixelVision8.Runner.Exporters
 {
@@ -98,7 +99,9 @@ namespace PixelVision8.Runner.Exporters
 
         public virtual void ConfigureColors()
         {
-            colors = colorChip.colors;
+            colors = ColorUtils.ConvertColors(colorChip.hexColors, colorChip.maskColor, colorChip.debugMode,
+                colorChip.backgroundColor);
+
             total = colors.Length;
 
             width = 8;

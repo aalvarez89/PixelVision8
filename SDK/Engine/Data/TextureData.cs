@@ -42,7 +42,7 @@ namespace PixelVision8.Engine
         protected int _width;
         public int[] pixels = new int[0];
 
-        private int[] tmpPixels;
+        // private int[] tmpPixels;
 
         protected int total;
 

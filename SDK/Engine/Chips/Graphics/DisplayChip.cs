@@ -31,7 +31,7 @@ namespace PixelVision8.Engine.Chips
         private DrawRequest draw;
         protected List<DrawRequest>[] DrawRequestLayers = new List<DrawRequest>[0];
         protected Stack<int[]> DrawRequestPixelDataPool = new Stack<int[]>();
-        public int[] Pixels = new int[0];
+        public byte[] Pixels = new byte[0];
         public int TotalPixels;
         public int OverscanX { get; set; }
         public int OverscanY { get; set; }
@@ -273,7 +273,7 @@ namespace PixelVision8.Engine.Chips
                     _index = _srcX + size * _srcY;
 
                     // Set the pixel
-                    Pixels[_index] = _colorID;//cachedColors[_colorID];
+                    Pixels[_index] = Convert.ToByte(_colorID);//cachedColors[_colorID];
                 }
             }
         }

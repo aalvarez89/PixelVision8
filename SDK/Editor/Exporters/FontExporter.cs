@@ -20,6 +20,7 @@
 
 using PixelVision8.Engine;
 using PixelVision8.Engine.Chips;
+using PixelVision8.Engine.Utils;
 using PixelVision8.Runner.Parsers;
 
 namespace PixelVision8.Runner.Exporters
@@ -64,9 +65,12 @@ namespace PixelVision8.Runner.Exporters
                     spriteChip.height, tmpPixelData);
             }
 
-            var colors = !(engine.GetChip(ColorMapParser.chipName, false) is ColorChip colorMapChip)
-                ? engine.ColorChip.colors
-                : colorMapChip.colors;
+            var colorChip = !(engine.GetChip(ColorMapParser.chipName, false) is ColorChip colorMapChip)
+                ? engine.ColorChip
+                : colorMapChip;
+
+            colors = ColorUtils.ConvertColors(colorChip.hexColors, colorChip.maskColor, colorChip.debugMode,
+                colorChip.backgroundColor);
 
             var imageExporter = new PNGWriter();
 

@@ -24,6 +24,8 @@ using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PixelVision8.Engine.Chips;
+using PixelVision8.Engine.Utils;
 using PixelVision8.Runner.Importers;
 using PixelVision8.Runner.Parsers;
 
@@ -45,7 +47,7 @@ namespace PixelVision8.Runner.Data
         public Vector2 scale = new Vector2(1, 1);
         private Effect shaderEffect;
         public bool stretchScreen;
-        private int totalPixels;
+        // private int totalPixels;
         private Rectangle visibleRect;
 
         // TODO think we just need to pass in the active game and not the entire runner?
@@ -253,30 +255,37 @@ namespace PixelVision8.Runner.Data
         private SpriteBatch _spriteBatch;
         private Texture2D _pixel;
 
-        public void RebuildColorPalette(Color[] colors)
+        public void RebuildColorPalette(ColorChip colorChip)
         {
-            
+
+            var colors = ColorUtils.ConvertColors(colorChip.hexColors, colorChip.maskColor, colorChip.debugMode,
+                colorChip.backgroundColor);
+
             // Create color palette texture
-            var cachedColors = colors;//pngReader.colorPalette.ToArray();
+            // var cachedColors = colors;//pngReader.colorPalette.ToArray();
 
             _spriteBatch = new SpriteBatch(graphicManager.GraphicsDevice);
 
             _colorPallete = new Texture2D(graphicManager.GraphicsDevice, colors.Length, 1);
 
             var fullPalette = new Color[_colorPallete.Width];
-            for (int i = 0; i < fullPalette.Length; i++) { fullPalette[i] = i < cachedColors.Length ? cachedColors[i] : cachedColors[0]; }
+            for (int i = 0; i < fullPalette.Length; i++) { fullPalette[i] = i < colors.Length ? colors[i] : colors[0]; }
 
             _colorPallete.SetData(colors);
 
             _pixel = new Texture2D(graphicManager.GraphicsDevice, 1, 1);
             _pixel.SetData(new Color[] { Color.White });
 
+            colorChip.ResetValidation();
+
         }
 
-        public void Render(int[] pixels)
+        
+
+        public void Render(byte[] pixels)
         {
 
-            renderTexture.SetData(pixels.Select(Convert.ToByte).ToArray());
+            renderTexture.SetData(pixels);
 
             _spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointClamp);
             crtShader.CurrentTechnique.Passes[0].Apply();

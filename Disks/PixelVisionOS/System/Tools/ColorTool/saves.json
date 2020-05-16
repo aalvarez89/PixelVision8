@@ -3,13 +3,13 @@
     "GameChip":
     {
         "savedData":{
-            "selectedPalettePage": "0",
-            "selectedSpritePage": "1",
-            "sessionID": "202005141503558089",
-            "rootDirectory": "/Workspace/SpaceRanger/",
-            "selectedColor": "-1",
+            "selectedSprite": "-1",
             "selectedPalette": "-1",
-            "selectedSprite": "-1"
+            "selectedColor": "-1",
+            "rootDirectory": "/Workspace/Spirally-Spiral/",
+            "sessionID": "202005161511163702",
+            "selectedSpritePage": "1",
+            "selectedPalettePage": "0"
         }
     }
 }

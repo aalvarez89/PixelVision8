@@ -19,6 +19,7 @@
 //
 
 using Microsoft.Xna.Framework;
+using PixelVision8.Engine.Chips;
 
 namespace PixelVision8.Runner
 {
@@ -26,9 +27,9 @@ namespace PixelVision8.Runner
     {
         void ResetResolution(int gameWidth, int gameHeight, int overScanX = 0, int overScanY = 0);
 
-        void RebuildColorPalette(Color[] colors);
+        void RebuildColorPalette(ColorChip colorChip);
         
-        void Render(int[] colors);
+        void Render(byte[] colors);
         //        void CacheColors(IEngine engine);
         //        void ConvertMousePosition(Vector pos);
     }

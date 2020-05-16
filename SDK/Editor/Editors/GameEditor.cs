@@ -388,7 +388,7 @@ namespace PixelVision8.Runner.Editors
             return targetGame.GetMetadata("ext", ".pv8");
         }
 
-        public int BackgroundColor(int? id = null)
+        public byte BackgroundColor(byte? id = null)
         {
             return gameChip.BackgroundColor(id);
         }

@@ -139,7 +139,7 @@ namespace PixelVision8.Runner.Parsers
             //            if (data.ContainsKey("total"))
             //                colorChip.total = (int) (long) data["total"];
 
-            if (data.ContainsKey("backgroundColor")) colorChip.backgroundColor = (int) (long) data["backgroundColor"];
+            if (data.ContainsKey("backgroundColor")) colorChip.backgroundColor = unchecked((byte) (long) data["backgroundColor"]);
 
             if (data.ContainsKey("debug")) colorChip.debugMode = Convert.ToBoolean(data["debug"]);
 

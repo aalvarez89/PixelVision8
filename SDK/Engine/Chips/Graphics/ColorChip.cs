@@ -21,7 +21,6 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Microsoft.Xna.Framework;
 using PixelVision8.Engine.Utils;
 
 namespace PixelVision8.Engine.Chips
@@ -33,7 +32,7 @@ namespace PixelVision8.Engine.Chips
     /// </summary>
     public class ColorChip : AbstractChip
     {
-        protected int _bgColor;
+        protected byte _bgColor;
 
         protected string[] _colors =
         {
@@ -61,7 +60,7 @@ namespace PixelVision8.Engine.Chips
 
         private int _maxColors = -1;
 
-        protected Color[] colorCache;
+        // protected Color[] colorCache;
 
         protected int[] invalidColors = new int[16];
 
@@ -73,8 +72,8 @@ namespace PixelVision8.Engine.Chips
         public int maxColors
         {
             //TODO this is not used in the chip and is here for the color tool.
-            get => _maxColors == -1 ? colors.Length : _maxColors;
-            set => _maxColors = value == -1 ? -1 : MathHelper.Clamp(value, 2, 256);
+            get => _maxColors == -1 ? byte.MaxValue: _maxColors;
+            set => _maxColors = value == -1 ? -1 : value;
         }
 
 
@@ -85,13 +84,13 @@ namespace PixelVision8.Engine.Chips
         ///     The background color reference to use when rendering transparent in
         ///     the ScreenBufferTexture.
         /// </summary>
-        public int backgroundColor
+        public byte backgroundColor
         {
             get => _bgColor;
             set
             {
                 // We make sure that the bg color is never set to a value out of the range of the color chip
-                _bgColor = MathHelper.Clamp(value, 0, total);
+                _bgColor = value;
                 Invalidate();
             }
         }
@@ -160,31 +159,31 @@ namespace PixelVision8.Engine.Chips
         ///     Returns a list of color data to be used for rendering.
         /// </summary>
         /// <value>ColorData[]</value>
-        public Color[] colors
-        {
-            get
-            {
-                if (invalid)
-                {
-                    var t = total;
-                    colorCache = new Color[t];
-
-                    for (var i = 0; i < t; i++)
-                    {
-                        var colorHex = _colors[i];
-
-                        if (colorHex == maskColor && debugMode == false) colorHex = _colors[backgroundColor];
-
-                        var color = ColorUtils.HexToColor(colorHex); // {flag = invalidColors[i]};
-                        colorCache[i] = color;
-                    }
-
-                    ResetValidation();
-                }
-
-                return colorCache;
-            }
-        }
+        // public Color[] colors
+        // {
+        //     get
+        //     {
+        //         if (invalid)
+        //         {
+        //             var t = total;
+        //             colorCache = new Color[t];
+        //
+        //             for (var i = 0; i < t; i++)
+        //             {
+        //                 var colorHex = _colors[i];
+        //
+        //                 if (colorHex == maskColor && debugMode == false) colorHex = _colors[backgroundColor];
+        //
+        //                 var color = ColorUtils.HexToColor(colorHex); // {flag = invalidColors[i]};
+        //                 colorCache[i] = color;
+        //             }
+        //
+        //             ResetValidation();
+        //         }
+        //
+        //         return colorCache;
+        //     }
+        // }
 
         // Setting this to true will use the mask color for empty colors instead of replacing them with the bg color
         public bool debugMode
@@ -256,7 +255,7 @@ namespace PixelVision8.Engine.Chips
         public override void Configure()
         {
             engine.ColorChip = this;
-            backgroundColor = -1;
+            backgroundColor = 0;
             total = 256;
 
             //            RebuildColorPages(16);
