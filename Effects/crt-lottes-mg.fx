@@ -18,7 +18,7 @@ struct VertexShaderOutput
 //
 // PUBLIC DOMAIN CRT STYLED SCAN-LINE SHADER
 //
-//   by Timothy Lottes
+//   by Timothy Lottes | Modified by Jesse Freeman for Pixel Vision 8
 //
 // This is more along the style of a really good CGA arcade monitor.
 // With RGB inputs instead of NTSC.
