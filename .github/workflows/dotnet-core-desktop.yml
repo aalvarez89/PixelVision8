@@ -7,28 +7,45 @@ on:
     branches: [ v1.9.8-github-actions ]
 
 jobs:
+  
+  
   build:
+    
+    strategy:
+      matrix:
+        configuration: [win-x64, osx-x64, linux-x64, linux-arm64]
 
     runs-on: windows-latest
-    #continue-on-error: true
 
     steps:
+    
     - uses: actions/checkout@v2
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    
     - name: Install dependencies
       run: dotnet restore
+    
     - name: Build
       run: dotnet build PixelVision8.sln
+    
     - name: Publish
-      run: dotnet publish -o Builds/macOS -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
+      run: dotnet publish -o Builds/macOS -c Release -r ${{ matrix.configuration }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
+    
+    - name: Get Timestamp Action
+      uses: nanzm/get-time-action@v1.0
+      with:
+        # timestamp format
+        format: DD-MM-YY
+  
     - name: Upload a Mac Artifact
       uses: actions/upload-artifact@v2
       with:
         # Artifact name
-        name: PixelVision8-v0.9.8
+        name: Pixel Vision 8 v0.9.8 ${{ matrix.configuration }} Preview Build ${{ steps.time.outputs.time }}
         # A file, directory or wildcard pattern that describes what to upload
         path: Builds/macOS/
         # The desired behavior if no files are found using the provided path.
