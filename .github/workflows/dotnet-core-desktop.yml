@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish -o Builds/OSX -c Release -r osx-x64
+      run: dotnet publish -o Builds/macOS -c Release -r osx-x64
     - name: Upload a Mac Artifact
       uses: actions/upload-artifact@v2
       with:
