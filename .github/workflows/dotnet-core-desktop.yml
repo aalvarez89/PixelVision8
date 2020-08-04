@@ -29,9 +29,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build PixelVision8.sln
-
     - name: Publish
       run: dotnet publish PixelVision8.CoreDesktop.csproj -o Builds/${{ matrix.configuration }} -c Release -r ${{ matrix.configuration }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
 
