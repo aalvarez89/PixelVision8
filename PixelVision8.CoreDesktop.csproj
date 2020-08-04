@@ -17,11 +17,9 @@
   <ItemGroup>
     <None Remove="Examples\**" />
     <None Remove="Disks\**" />
-    <None Remove="Resources\**" />
     <None Remove="LICENSE.txt" />
     <None Remove="CODE_OF_CONDUCT.md" />
     <None Remove=".gitignore" />
-    <None Remove="README.md" />
     <None Remove="Effects\mgfxc.exe" />
   </ItemGroup>
 
