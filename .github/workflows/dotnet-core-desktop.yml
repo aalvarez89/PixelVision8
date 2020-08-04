@@ -33,7 +33,7 @@ jobs:
       run: dotnet build PixelVision8.sln
     
     - name: Publish
-      run: dotnet publish -o Builds/macOS -c Release -r ${{ matrix.configuration }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
+      run: dotnet publish PixelVision8.CoreDesktop.csproj -o Builds/macOS -c Release -r ${{ matrix.configuration }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
     
     - name: Get Timestamp Action
       uses: nanzm/get-time-action@v1.0
