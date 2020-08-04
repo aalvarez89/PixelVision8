@@ -228,7 +228,7 @@ namespace PixelVision8.Runner.Data
         {
 
             renderTexture.SetData(pixels);
-            spriteBatch.Begin(SpriteSortMode.Immediate, SamplerState.PointClamp);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointClamp);
             crtShader.CurrentTechnique.Passes[0].Apply();
             graphicManager.GraphicsDevice.Textures[1] = _colorPalette;
             graphicManager.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;

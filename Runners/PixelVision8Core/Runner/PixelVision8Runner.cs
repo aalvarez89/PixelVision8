@@ -517,7 +517,7 @@ namespace PixelVision8.Runner
             if (bios.ReadBiosData("FileDiskMounting", "True", true) != "False")
             {
                 // Setup Drag and drop support
-                Window.FileDropped += (o, e) => OnFileDropped(o, e);
+                // Window.FileDropped += (o, e) => OnFileDropped(o, e);
 
                 // Disable auto run when loading up the default disks
                 autoRunEnabled = false;
