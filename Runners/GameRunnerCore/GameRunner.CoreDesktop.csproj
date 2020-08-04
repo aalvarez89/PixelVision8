@@ -4,13 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyName>PixelVision8Runner</AssemblyName>
-    <RootNamespace>PixelVision8Runner</RootNamespace>
+    <AssemblyName>Pixel Vision 8 Runner</AssemblyName>
+    <RootNamespace>com.pixelvision8.runner</RootNamespace>
     <Version>1.9.8</Version>
     <PackageId>PixelVision8Runner</PackageId>
     <PackageIcon>Icon.png</PackageIcon>
     <Copyright>Jesse Freeman 2020</Copyright>
     <UseAppHost>true</UseAppHost>
+    <Company>Pixel Vision 8</Company>
+    <Product>Pixel Vision 8R unner</Product>
+    <AssemblyVersion>0.9.8</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
