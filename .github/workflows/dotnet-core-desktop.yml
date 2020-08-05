@@ -1,13 +1,10 @@
-name: .NET Core
+name: Pixel Vision 8 Automatic Builder
 
 on:
   push:
     branches: [ v1.9.8-github-actions ]
-  pull_request:
-    branches: [ v1.9.8-github-actions ]
 
 jobs:
-
 
   build:
 
@@ -15,7 +12,7 @@ jobs:
       matrix:
         configuration: [win-x64, osx-x64, linux-x64, linux-arm64]
 
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
 
@@ -32,17 +29,11 @@ jobs:
     - name: Publish
       run: dotnet publish PixelVision8.CoreDesktop.csproj -o Builds/${{ matrix.configuration }} -c Release -r ${{ matrix.configuration }} --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
 
-    - name: Get Timestamp Action
-      uses: nanzm/get-time-action@v1.0
-      with:
-        # timestamp format
-        format: DD-MM-YY
-
     - name: Upload a Mac Artifact
       uses: actions/upload-artifact@v2
       with:
         # Artifact name
-        name: Pixel Vision 8 v0.9.8 ${{ matrix.configuration }} Preview Build ${{ steps.time.outputs.time }}
+        name: Pixel Vision 8 v0.9.8 ${{ matrix.configuration }} Preview
         # A file, directory or wildcard pattern that describes what to upload
         path: Builds/${{ matrix.configuration }}/
         # The desired behavior if no files are found using the provided path.
